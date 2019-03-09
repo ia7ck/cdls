@@ -117,7 +117,7 @@ const app = new Vue({
   },
   methods: {
     next() {
-      if (this.commands.length < 2) {
+      if (this.commands.length < 10) {
         this.commands.push(command_candidates.random_choice());
       } else {
         this.finished = true;
