@@ -38,6 +38,9 @@ const CommandPair = {
         window.removeEventListener("keydown", this.check);
       }
     },
+    show() {
+      return this.typed.length > 0 && this.typed.length < this.target.length;
+    },
   },
   computed: {
     chars() {
@@ -46,16 +49,13 @@ const CommandPair = {
     suggestedChar() {
       return this.target[this.typed.length];
     },
-    show() {
-      return this.typed.length > 0 && this.typed.length < this.target.length;
-    },
   },
   template: `
     <div>
       <span>{{ '$ ' + above_command }}</span>
       <br>
       <span>{{ '$' }}</span>
-      <span v-for="(ch, idx) in chars">{{ ch }}</span><span v-if="show" style="color: lightgray;">{{ suggestedChar }}</span>
+      <span v-for="(ch, idx) in chars">{{ ch }}</span><span v-if="show()" style="color: lightgray;">{{ suggestedChar }}</span>
     </div>
   `
 };
@@ -92,7 +92,7 @@ const Timer = {
     },
   },
   computed: {
-    format_time(ms) {
+    format_time() {
       return (Math.floor(this.elapse_time / 100) / 10).toFixed(1);
     }
   },
